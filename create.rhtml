@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS" />
+  <title>New page - trpy</title>
+  <style type="text/css">
+    body {
+      font-family:Verdana,sans-serif;
+      margin: 5% 20% 5% 20%;
+    }
+    div.navi {
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="navi">
+    <a href="<%= trpy_url%>" title="random jump to other page.">Jump</a>
+  </div>
+
+  <h1>New page:</h1>
+
+  <form action="<%= trpy_url %>" method="POST">
+    <textarea name="content" cols="60" rows="20"></textarea><br />
+    <input type="hidden" name="u">
+    <input type="submit" value="Write">
+  </form>
+
+</body>
+
+</html>

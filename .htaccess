@@ -1,0 +1,9 @@
+Options +ExecCGI
+
+AddHandler cgi-script .cgi
+DirectoryIndex trpy.cgi
+
+<Files "*.rhtml*">
+	deny from all
+</Files>
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS" />
+  <title><%= page_title %> - trpy</title>
+  <style type="text/css">
+    body {
+      font-family:Verdana,sans-serif;
+      margin: 5% 20% 5% 20%;
+    }
+    div.navi {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navi">
+    <a href="<%= trpy_url%>?e=<%= page_id %>" title="edit this page.">Edit</a>
+    <a href="<%= trpy_url%>?c" title="create a new page.">Create</a>
+    <a href="<%= trpy_url%>" title="random jump to other page.">Jump</a>
+  </div>
+
+  <h1><%= page_title %></h1>
+
+  <div class="trpy_body">
+    <%= page_body %>
+  </div>
+
+</body>
+
+</html>
+
