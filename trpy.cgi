@@ -30,7 +30,7 @@ class DataPool
     id = nil
     while true
       id = rand(100000000).to_s
-      break pool.include?(id)
+      break unless pool.include?(id)
     end
     id
   end
@@ -40,7 +40,6 @@ pool = DataPool.new(data_dir)
 cgi = CGI.new
 if cgi.include?('c')
   template = "#{template_dir}/create.rhtml"
-  page_title = "New page:"
   page_body = ""
 elsif cgi.include?('e')
   template = "#{template_dir}/edit.rhtml"
