@@ -5,15 +5,12 @@
 
 require 'cgi'
 require 'erb'
-
-## Config
-trpy_url = "http://localhost/~st/trpy/"
-template_dir = "."
-data_dir = "./data"
+require 'yaml'
 
 class DataPool
   def initialize(data_dir)
     @data_dir = data_dir
+    @entries = entries
   end
 
   def entries
@@ -21,43 +18,44 @@ class DataPool
   end
 
   def random_page
-    pool = entries
-    pool[rand(pool.size)]
+    @entries[rand(@entries.size)]
   end
 
   def new_page_id
-    pool = entries
     id = nil
     while true
       id = rand(100000000).to_s
-      break unless pool.include?(id)
+      break unless @entries.include?(id)
     end
     id
   end
 end
 
-pool = DataPool.new(data_dir)
+
+config = YAML.load_file("./trpy.conf")
+trpy_url = config["trpy_url"]
+pool = DataPool.new(config["data_dir"])
 cgi = CGI.new
 if cgi.include?('c')
-  template = "#{template_dir}/create.rhtml"
+  template = "#{config["template_dir"]}/create.rhtml"
   page_body = ""
 elsif cgi.include?('e')
-  template = "#{template_dir}/edit.rhtml"
+  template = "#{config["template_dir"]}/edit.rhtml"
   page_id = cgi.params['e'][0]
-  data = File.open("#{data_dir}/#{page_id}", "r"){|f| f.readlines}
+  data = File.open("#{config["data_dir"]}/#{page_id}", "r"){|f| f.readlines}
   page_body = data.join("")
 elsif cgi.include?('u')
-  template = "#{template_dir}/trpy.rhtml"
+  template = "#{config["template_dir"]}/trpy.rhtml"
   page_id = cgi.params['u'][0] == "" ? pool.new_page_id : cgi.params['u'][0]
   data = CGI.escapeHTML(CGI.unescape(cgi.params['content'][0]))
-  File.open("#{data_dir}/#{page_id}", "wb"){|f| f.write(data)}
+  File.open("#{config["data_dir"]}/#{page_id}", "wb"){|f| f.write(data)}
   data = data.split("\n")
   page_title = data.shift.chomp
   page_body = data.map{|l| l.chomp}.join("<br />\n")
 else
-  template = "#{template_dir}/trpy.rhtml"
+  template = "#{config["template_dir"]}/trpy.rhtml"
   page_id = pool.random_page
-  data = File.open("#{data_dir}/#{page_id}", "r"){|f| f.readlines}
+  data = File.open("#{config["data_dir"]}/#{page_id}", "r"){|f| f.readlines}
   page_title = data.shift.chomp
   page_body = data.map{|l| l.chomp}.join("<br />\n")
 end
