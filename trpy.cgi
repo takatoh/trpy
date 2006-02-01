@@ -7,18 +7,10 @@ require 'cgi'
 require 'erb'
 require 'yaml'
 
-## Config
-config = YAML.load_file("./trpy.conf")
-#trpy_url = "http://localhost/~st/trpy/"
-#template_dir = "."
-#data_dir = "./data"
-trpy_url = config["trpy_url"]
-template_dir = config["template_dir"]
-data_dir = config["data_dir"]
-
 class DataPool
   def initialize(data_dir)
     @data_dir = data_dir
+    @entries = entries
   end
 
   def entries
@@ -26,21 +18,24 @@ class DataPool
   end
 
   def random_page
-    pool = entries
-    pool[rand(pool.size)]
+    @entries[rand(@entries.size)]
   end
 
   def new_page_id
-    pool = entries
     id = nil
     while true
       id = rand(100000000).to_s
-      break unless pool.include?(id)
+      break unless @entries.include?(id)
     end
     id
   end
 end
 
+
+config = YAML.load_file("./trpy.conf")
+trpy_url = config["trpy_url"]
+template_dir = config["template_dir"]
+data_dir = config["data_dir"]
 pool = DataPool.new(data_dir)
 cgi = CGI.new
 if cgi.include?('c')
