@@ -1,0 +1,3 @@
+trpy_url:     http://www.example.como/trpy/
+template_dir: .
+data_dir:     ./data

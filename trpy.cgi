@@ -5,11 +5,16 @@
 
 require 'cgi'
 require 'erb'
+require 'yaml'
 
 ## Config
-trpy_url = "http://localhost/~st/trpy/"
-template_dir = "."
-data_dir = "./data"
+config = YAML.load_file("./trpy.conf")
+#trpy_url = "http://localhost/~st/trpy/"
+#template_dir = "."
+#data_dir = "./data"
+trpy_url = config["trpy_url"]
+template_dir = config["template_dir"]
+data_dir = config["data_dir"]
 
 class DataPool
   def initialize(data_dir)
