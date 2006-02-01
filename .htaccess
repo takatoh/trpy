@@ -7,3 +7,7 @@ DirectoryIndex trpy.cgi
 	deny from all
 </Files>
 
+<Files "trpy.conf*">
+	deny from all
+</Files>
+
