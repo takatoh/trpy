@@ -47,7 +47,7 @@ elsif cgi.include?('e')
 elsif cgi.include?('u')
   template = "#{config["template_dir"]}/trpy.rhtml"
   page_id = cgi.params['u'][0] == "" ? pool.new_page_id : cgi.params['u'][0]
-  data = CGI.escapeHTML(CGI.unescape(cgi.params['content'][0]))
+  data = cgi.params['content'][0]
   File.open("#{config["data_dir"]}/#{page_id}", "wb"){|f| f.write(data)}
   data = data.split("\n")
   page_title = data.shift.chomp
