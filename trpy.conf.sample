@@ -1,3 +1,4 @@
 trpy_url:     http://www.example.com/trpy/
 template_dir: ./template
 data_dir:     ./data
+trpy_css:     ./css/trpy.css

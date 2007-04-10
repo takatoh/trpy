@@ -59,6 +59,7 @@ else
   page_title = data.shift.chomp
   page_body = data.map{|l| l.chomp}.join("<br />\n")
 end
+trpy_css = config["trpy_css"]
 
 print "Content-type: text/html\n\n"
 page = ERB.new(File.open(template){|f| f.read}, nil, "<>")
