@@ -6,5 +6,6 @@ server = WEBrick::HTTPServer.new(
     :Port => '10080' })
 trap('INT'){ server.shutdown }
 server.mount('/', WEBrick::HTTPServlet::CGIHandler, 'ruby trpy.cgi')
+server.mount('/css', WEBrick::HTTPServlet::FileHandler, './css')
 server.start
 
